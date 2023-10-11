@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 4004090271913018720}
   - component: {fileID: 3723843116759840465}
   - component: {fileID: 929562611149424639}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -162,3 +162,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   vitesse: 3
+  lifetime: 10
+  degats: 5

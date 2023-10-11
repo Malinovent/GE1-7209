@@ -7,9 +7,9 @@ public class Projectile : MonoBehaviour
 {
     [SerializeField] private float vitesse = 3;
     [SerializeField] private float lifetime = 10;
+    [SerializeField] private int degats = 5;
 
     private Rigidbody2D rb;
-
 
     private void Start()
     {
@@ -19,5 +19,23 @@ public class Projectile : MonoBehaviour
         Destroy(this.gameObject, lifetime);
     }
 
-   
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+
+        /* 1.
+        if(collision.CompareTag("Enemy"))
+        {
+            collision.GetComponent<Health>().TakeDamage(degats);
+        }*/
+
+        Health health = collision.GetComponent<Health>();
+
+        if (health)
+        {
+            health.TakeDamage(degats);
+            Destroy(this.gameObject); 
+        }
+    }
+
+
 }

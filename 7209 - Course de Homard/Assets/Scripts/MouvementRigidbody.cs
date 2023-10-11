@@ -6,6 +6,9 @@ public class MouvementRigidbody : MonoBehaviour
 {
     [SerializeField] private float vitesse = 1;
     [SerializeField] private float forceSaut = 100;
+    [SerializeField] private int maxSaut = 2;
+
+    private int nombreSautActuel = 0;
 
     Rigidbody2D rb2d;
     [SerializeField] SpriteRenderer spriteRenderer;
@@ -43,9 +46,20 @@ public class MouvementRigidbody : MonoBehaviour
 
     public void Jump()
     {
-        //Saute
-        rb2d.AddForce(new Vector2(0, forceSaut));
-        
+        if (nombreSautActuel++ < maxSaut)
+        {
+            //Saute
+            //nombreSautActuel++;
+            rb2d.AddForce(new Vector2(0, forceSaut));
+        }  
+    }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
+        if(collision.contacts[0].normal.y > 0.7f)
+        {
+            nombreSautActuel = 0;
+        }
     }
 
 }
