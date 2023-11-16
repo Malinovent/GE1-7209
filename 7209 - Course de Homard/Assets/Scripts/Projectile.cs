@@ -12,13 +12,34 @@ public class Projectile : MonoBehaviour
 
     private Rigidbody2D rb;
 
-    private void Start()
+    private Queue<GameObject> pool;
+
+    private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         rb.velocity = transform.right * vitesse;
-
-        Destroy(this.gameObject, lifetime);
     }
+
+    private Coroutine coroutine;
+
+    //Chaque fois c active
+    private void OnEnable()
+    {
+        rb.velocity = transform.right * vitesse;
+
+        if (coroutine != null) 
+        { 
+            StopCoroutine(coroutine);
+        }
+
+        coroutine = StartCoroutine(ReturnToQueueCoroutine());
+    }
+
+    IEnumerator ReturnToQueueCoroutine()
+    {
+        yield return new WaitForSeconds(lifetime);
+        ReturnToQueue();
+    } 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -40,8 +61,19 @@ public class Projectile : MonoBehaviour
             //Detruire l'effet apres 2 secondes
             Destroy(particuleGO.gameObject, 2);
 
-            Destroy(this.gameObject); 
+            ReturnToQueue();
         }
+    }
+
+    public void SetPoolReference(Queue<GameObject> newPool)
+    {
+        pool = newPool;
+    }
+
+    private void ReturnToQueue()
+    {
+        pool.Enqueue(this.gameObject);
+        this.gameObject.SetActive(false);
     }
 
 

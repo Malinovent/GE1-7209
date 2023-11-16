@@ -945,7 +945,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 46c48e6dc671c3847b6ee76174ddd9b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 10
+  maxHealth: 1000
   onGainHealth:
     m_PersistentCalls:
       m_Calls: []
@@ -2246,6 +2246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectilePrefab: {fileID: 250634171873252279, guid: 88fae1582fa228b4fabf4bedbbef2cba, type: 3}
   projectileFirePoint: {fileID: 1219552841}
+  initialPoolSize: 5
 --- !u!1 &1323748174
 GameObject:
   m_ObjectHideFlags: 0
